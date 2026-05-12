@@ -13,6 +13,11 @@
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
             <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf   
+
+                @if (session('mensaje'))
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-center p-2 text-sm">{{ session('mensaje') }}</p>
+                @endif
+
                 <div class="mb-5">
                     <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">Email</label>
                     <input 
@@ -41,6 +46,10 @@
                     @error('password')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-center p-2 text-sm">{{ $message }}</p>
                     @enderror
+                </div>
+
+                <div class="mb-5">
+                    <input type="checkbox" name="remember" id="remember"> <label for="remember" class="uppercase text-sm text-gray-500">Mantener mi sesión abierta</label>
                 </div>
                 
                 <input type="submit" value="Iniciar Sesion" class="bg-sky-600 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
